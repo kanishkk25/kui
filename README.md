@@ -127,6 +127,7 @@ Uses VT100 escape sequences:
 
 ## Limitations
 
+* Only for Unix-based OS
 * 1-based coordinate system
 * No bounds checking
 * No input handling
@@ -139,8 +140,6 @@ Uses VT100 escape sequences:
 * Menu system (scrollable, interactive)
 * Keyboard input handling
 * Window/panel abstraction
-* Unicode support
-* Layout engine
 
 ---
 
