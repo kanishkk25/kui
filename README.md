@@ -47,7 +47,7 @@ gcc eg1.c -o eg1.out -I /kui/include -L /kui/lib -lkui
 
 ```
 
-./demo
+./eg1.out
 
 ````
 
