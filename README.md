@@ -27,17 +27,9 @@ kui/
 │   └── kui_vt100.h
 ├── src/
 │   └── kui.c
+├── lib/
+│   └── libkui.a
 └── README.md
-
-```
-
----
-
-## Build
-
-```
-
-gcc eg1.c -o eg1.out -I /kui/include -L /kui/lib -lkui
 
 ```
 
@@ -75,6 +67,18 @@ int main()
     return 0;
 }
 ````
+
+---
+
+## Run / execute
+
+```
+
+gcc eg1.c -o eg1.out -I kui/include -L kui/lib -lkui
+
+./eg1.out
+
+```
 
 ---
 
