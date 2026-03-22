@@ -38,4 +38,13 @@ void kui_draw_double_horizontal_line(int row,int column1,int column2);
 void kui_draw_double_vertical_line(int column,int row1,int row2);
 
 void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_right_row,int bottom_right_column);
+
+void kui_set_background_color(char *color);
+void kui_set_foreground_color(char *color);
+void kui_set_color(char *foreground_color,char *background_color);
+
+void kui_remove_background_color();
+void kui_remove_foreground_color();
+void kui_remove_color();
+
 #endif
