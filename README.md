@@ -26,9 +26,7 @@ kui/
 ├── include/
 │   └── kui_vt100.h
 ├── src/
-│   └── kui_vt100.c
-├── examples/
-│   └── demo.c
+│   └── kui.c
 └── README.md
 
 ```
@@ -39,7 +37,7 @@ kui/
 
 ```
 
-gcc examples/demo.c src/kui_vt100.c -Iinclude -o demo
+gcc eg1.c -o eg1.out -I /kui/include -L /kui/lib -lkui
 
 ```
 
