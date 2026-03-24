@@ -98,6 +98,9 @@ void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_ri
  * - magenta
  * - cyan
  * - white
+ *
+ * NOTE: you have to pass one of these color name with as it is, because we are performing case-sensitive
+ * string comparison under the hood.
  */
 
 /**
