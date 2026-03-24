@@ -10,11 +10,8 @@ It provides APIs for cursor control, text rendering, drawing primitives, and col
 
 - Cursor positioning
 - Screen clearing
-- Text rendering at coordinates
 - Single-line and double-line drawing
-- Box rendering
 - Foreground and background color control
-- Minimal and dependency-free
 
 ---
 
@@ -29,19 +26,12 @@ kui/
 │   └── kui.c
 ├── lib/
 │   └── libkui.a
+├── testcases/
+│   └── eg1.c
+│   └── eg2.c
 └── README.md
 
 ```
-
----
-
-## Run
-
-```
-
-./eg1.out
-
-````
 
 ---
 
@@ -131,8 +121,6 @@ Uses VT100 escape sequences:
 
 ## Limitations
 
-* Only for Unix-based OS
-* 1-based coordinate system
 * No bounds checking
 * No input handling
 * Requires VT100-compatible terminal
