@@ -8,7 +8,6 @@ void err_exit(const char *message)
     printf("%s\n",message);
     exit(0);
 }
-
 int main()
 {
     char *hobbies[]={"Cricket","Badminton","Movies","Reading","Swimming","Cooking"};
