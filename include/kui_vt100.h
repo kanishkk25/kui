@@ -30,6 +30,16 @@ void kui_go_to_xy(int row,int column);
 void kui_say(int row,int column,char *str);
 
 
+/* *
+ * @brief Prints a char at a given position
+ *
+ * @param row index of target row
+ * @param column index of target column
+ * @param m char to be print
+ */
+void kui_say_char(int row,int column,char m);
+
+
 /**
  * @brief Draws a horizontal line
  *
