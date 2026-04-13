@@ -82,6 +82,13 @@ make buildeg4
 
 make clear -- removes all .out files
 ```
+---
+## Build Library
+
+'''
+make build -- rebuilds the libkui.a file, updating the library with any changes
+''
+
 
 ---
 
