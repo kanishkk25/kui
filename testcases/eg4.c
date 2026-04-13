@@ -74,14 +74,20 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
         fflush(stdin);
         if(i+1 == char_width) break;
         if(m==10) break;
-        if(m==127 && i>0 && k>0)
+        if(m==127 && i>0)
         {
+            if(k==0)
+            {
+                cursor_column=column+1;
+            }
+            else
+            {
             // write(fileno(stdout),"\033[1D",3);
             for(z=k-1;z<i;z++)
             {
                 array[z]=array[z+1];
             }
-            array[z]='\0';
+            //array[z]='\0';
             i--;
             k--;
 
@@ -89,6 +95,7 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
             cursor_column=column + (k%screen_width) + 1;
             cursorMoved=0;
             continue;
+            }
         }
         else if(m==27)
         {
@@ -124,7 +131,7 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
             if(bb==91 && cc==68)
             {
                 // left arrow key
-                if(k>0)
+                if(k>0 && i>0)
                 {
                     if(k%screen_width==0)
                     {
@@ -146,20 +153,20 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
             if(i==k)
             {
                 array[i]=m;
-                array[i+1]='\0';
                 i++;
+                array[i]='\0';
                 k=i;
             }
             else
             {
-                array[i]='\0';
-                i++;
-                for(z=i-1;z>=k;z--)
+                for(z=i;z>k;z--)
                 {
-                    array[z+1]=array[z];
+                    array[z]=array[z-1];
                 }
                 array[k]=m;
                 k++;
+                i++;
+                array[i]='\0';
                 if(k%screen_width==0) cursor_row=cursor_row+1;
                 cursor_column=column + (k%screen_width)+1;
             }
