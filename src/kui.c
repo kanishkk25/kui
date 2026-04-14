@@ -90,6 +90,9 @@ void kui_draw_box(int top_left_row,int top_left_column,int bottom_right_row,int 
     kui_say(bottom_right_row,bottom_right_column,"\u2518");
 }
 
+/**
+ * draws a double horizontal line at the given location
+ */
 void kui_draw_double_horizontal_line(int row,int column1,int column2)
 {
     int start=column1;
@@ -102,6 +105,10 @@ void kui_draw_double_horizontal_line(int row,int column1,int column2)
     fflush(stdout);
 }
 
+
+/**
+ * draws a double vertical line at the given location
+ */
 void kui_draw_double_vertical_line(int column,int row1,int row2)
 {
     int start=row1;
@@ -111,6 +118,10 @@ void kui_draw_double_vertical_line(int column,int row1,int row2)
         start++;
     }
 }
+
+/**
+ * draws a double line box at the given location
+ */
 void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_right_row,int bottom_right_column)
 {
     kui_say(top_left_row,top_left_column,"\u2554");
@@ -127,6 +138,15 @@ void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_ri
 
     kui_say(bottom_right_row,bottom_right_column,"\u255d");
 }
+
+/**
+ * sets the foreground color to the color given
+ *
+ * valid colors include "black", "red", "green", "yellow",
+ * "blue", "magenta", "cyan", and "white"
+ *
+ * if an invalid color is passed an error message is thrown to stderr
+ */
 void kui_set_foreground_color(char *color)
 {
     if(strcmp(color,"black")==0) printf("\033[30m");
@@ -137,8 +157,19 @@ void kui_set_foreground_color(char *color)
     else if(strcmp(color,"magenta")==0) printf("\033[35m");
     else if(strcmp(color,"cyan")==0) printf("\033[36m");
     else if(strcmp(color,"white")==0) printf("\033[37m");
+    else {
+        fprintf(stderr, "kui_set_foreground_color: Invalid color");
+    }
 }
 
+/*
+ * sets the background color to the color given
+ *
+ * valid colors include "black", "red", "green", "yellow",
+ * "blue", "magenta", "cyan", and "white"
+ *
+ * if an invalid color is passed an error message is thrown to stderr
+ */
 void kui_set_background_color(char *color)
 {
     if(strcmp(color,"black")==0) printf("\033[40m");
@@ -149,21 +180,44 @@ void kui_set_background_color(char *color)
     else if(strcmp(color,"magenta")==0) printf("\033[45m");
     else if(strcmp(color,"cyan")==0) printf("\033[46m");
     else if(strcmp(color,"white")==0) printf("\033[47m");
+    else{
+        fprintf(stderr, "kui_set_background_color: Invalid color");
+    }
 }
+
+/*
+ * sets both the background and foreground colors to the color given
+ *
+ * valid colors include "black", "red", "green", "yellow",
+ * "blue", "magenta", "cyan", and "white"
+ *
+ * if an invalid color is passed an error message is thrown to stderr
+ */
 void kui_set_color(char *foreground_color,char *background_color)
 {
     kui_set_foreground_color(foreground_color);
     kui_set_background_color(background_color);
 }
 
+/*
+ * removes the current background color
+ */
 void kui_remove_background_color()
 {
     printf("\033[49m");
 }
+
+/*
+ * removes the current foreground color
+ */
 void kui_remove_foreground_color()
 {
     printf("\033[39m");
 }
+
+/**
+ * 
+ */
 void kui_remove_color()
 {
     printf("\033[0m");

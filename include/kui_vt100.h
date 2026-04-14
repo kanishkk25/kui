@@ -4,7 +4,7 @@
  */
 
 #ifndef __KUI_VT100_H
-#define __KUI_VT100_h
+#define __KUI_VT100_H
 
 
 /**

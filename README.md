@@ -29,7 +29,12 @@ kui/
 ├── testcases/
 │   └── eg1.c
 │   └── eg2.c
+│   └── eg3.c
+│   └── eg4.c
+├── Makefile
 └── README.md
+
+
 
 ```
 
@@ -37,7 +42,7 @@ kui/
 
 ## Example
 
-```c
+```
 #include "kui_vt100.h"
 
 int main()
@@ -56,19 +61,34 @@ int main()
 
     return 0;
 }
-````
+```
 
 ---
 
-## Run / execute
+## Run / execute via Makefile
 
 ```
-
-gcc eg1.c -o eg1.out -I kui/include -L kui/lib -lkui
-
+make buildeg1
 ./eg1.out
 
+make buildeg2
+./eg2.out
+
+make buildeg3
+./eg3.out
+
+make buildeg4
+./eg4.out
+
+make clear -- removes all .out files
 ```
+---
+## Build Library
+
+```
+make build -- rebuilds the libkui.a file, updating the library with any changes
+```
+
 
 ---
 
@@ -76,15 +96,18 @@ gcc eg1.c -o eg1.out -I kui/include -L kui/lib -lkui
 
 ### Screen
 
+
+```
 * kui_clear()
 * kui_go_to_xy(row, column)
+```
 
 ### Text
-
+```
 * kui_say(row, column, str)
-
+```
 ### Drawing
-
+```
 * kui_draw_horizontal_line()
 
 * kui_draw_vertical_line()
@@ -96,14 +119,14 @@ gcc eg1.c -o eg1.out -I kui/include -L kui/lib -lkui
 * kui_draw_double_vertical_line()
 
 * kui_draw_double_line_box()
-
+```
 ### Color
-
+```
 * kui_set_foreground_color()
 * kui_set_background_color()
 * kui_set_color()
 * kui_remove_color()
-
+```
 ---
 
 ## How It Works
@@ -120,23 +143,23 @@ Uses VT100 escape sequences:
 ---
 
 ## Limitations
-
+```
 * No bounds checking
 * No input handling
 * Requires VT100-compatible terminal
-
+```
 ---
 
 ## Future Work
-
+```
 * Menu system (scrollable, interactive)
 * Keyboard input handling
 * Window/panel abstraction
-
+```
 ---
 
 ## Author
-
+```
 Kanishk Chouhan
-
+```
 ---

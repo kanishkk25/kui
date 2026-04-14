@@ -2,7 +2,7 @@
 #include<termios.h>
 #include<stdlib.h>
 #include<unistd.h>
-#include<kui_vt100.h>
+#include "kui_vt100.h"
 void err_exit(const char *message)
 {
     printf("%s\n",message);
