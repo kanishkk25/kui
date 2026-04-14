@@ -3,10 +3,9 @@
 #include<string.h>
 #include<termios.h>
 #include<unistd.h>
-void kui_input_box(int row,int column,char *array,int char_width,int screen_width,char ld,char rd)
+void kui_input_box(int row,int column,char *array,int size,int screen_width,char ld,char rd)
 {
     struct termios new_t,old_t;
-    int maxLenght=char_width;
     int i;
     char m;
     int r,c;
@@ -18,7 +17,7 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
     int cursorMoved=0;
     if(row<1 || column<1) return;
     if(array==NULL) return;
-    if(char_width<1) return;
+    if(size<1) return;
     if(screen_width<1) return;
     if(strlen(array)>0)
     {
@@ -34,6 +33,9 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
     new_t.c_cc[VTIME]=0;
 
     tcsetattr(fileno(stdout),0,&new_t);
+
+    cursor_row=row;
+    cursor_column=column+1; 
     k=0;
     i=0;
     while(1)
@@ -72,7 +74,7 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
         }
         m=getchar();
         fflush(stdin);
-        if(i+1 == char_width) break;
+        if(i+1==size) break;
         if(m==10) break;
         if(m==127 && i>0)
         {
@@ -87,11 +89,11 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
             {
                 array[z]=array[z+1];
             }
-            //array[z]='\0';
             i--;
+            array[i]='\0';
             k--;
 
-            if((k+1)%screen_width==0) cursor_row=cursor_row-1;
+            cursor_row=row + (k/screen_width);  
             cursor_column=column + (k%screen_width) + 1;
             cursorMoved=0;
             continue;
@@ -167,7 +169,7 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
                 k++;
                 i++;
                 array[i]='\0';
-                if(k%screen_width==0) cursor_row=cursor_row+1;
+                cursor_row=row + (k/screen_width);
                 cursor_column=column + (k%screen_width)+1;
             }
             cursorMoved=0;
@@ -180,6 +182,13 @@ void kui_input_box(int row,int column,char *array,int char_width,int screen_widt
 int main()
 {
     char a[501];
-    kui_input_box(4,6,a,500,20,'[',']');
+    kui_input_box(4,6,a,501,20,'[',']'); // 1st argument - row index
+                                         // 2nd argument - column index
+                                         // 3rd argument - base address of the array
+                                         // 4th argument - size of the array including '\0'
+                                         // 5th argument - screen width for input
+                                         // 6th argument - left delimeter
+                                         // 7th argument - right delimeter
+    printf("Text in box is : %s\n",a);
     return 0;
 }
