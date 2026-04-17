@@ -150,4 +150,21 @@ void kui_remove_foreground_color();
  */
 void kui_remove_color();
 
+/**
+ * @brief Displays a fix-sized Menu list, allowing users to navigate additional options via scrolling
+ * 
+ * @param menu base address of 2D array containing options in menu
+ * @param menu_size size of the menu list
+ * @param visible_size default number of options to display 
+ * @param row Row from where menu will be displayed
+ * @param column Column from where menu will be displayed
+ * @param height Height of the menu 
+ * @param width Width of the menu
+ *
+ * @return The index of the selected option
+ *
+ */
+
+int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int height,int width);
+
 #endif
