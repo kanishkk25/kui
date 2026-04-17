@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
+#include<termios.h>
 /**
  * to clear the screen
  */
@@ -167,4 +168,107 @@ void kui_remove_foreground_color()
 void kui_remove_color()
 {
     printf("\033[0m");
+}
+
+
+int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int height,int width)
+{
+    int start,end;
+    int i;
+    int top_left_row,top_right_column,bottom_left_row,bottom_right_column;
+    int selected;
+    int r,col;
+    struct termios new_t,old_t;
+    char a,b,c;
+    if(tcgetattr(STDIN_FILENO,&old_t)==-1)
+    {
+        return -1;
+    }
+    new_t=old_t;
+    new_t.c_lflag=new_t.c_lflag & ~(ECHO | ICANON);
+    new_t.c_cc[VTIME]=0;
+    new_t.c_cc[VMIN]=1;
+    if(tcsetattr(STDIN_FILENO,0,&new_t)==-1)
+    {
+        return -1;
+    }
+    top_left_row=row;
+    top_right_column=column;
+    bottom_left_row=row+height;
+    bottom_right_column=column+width;
+
+    start=0;
+    selected=0;
+    while(1)
+    {
+        kui_clear();
+        kui_draw_box(top_left_row,top_right_column,bottom_left_row,bottom_right_column);
+        r=row+1;
+        col=column+1;
+        end=start+visible_size;
+        if(end>menu_size) end=menu_size;
+        kui_go_to_xy(r,col);
+        for(i=start;i<end;i++)
+        {
+            kui_go_to_xy(r,col);
+            r++;
+            if(i==selected)
+            {
+                kui_set_background_color("white");
+                printf("%s\n",menu[i]);
+                kui_remove_background_color();
+            }
+            else
+            {
+                printf("%s\n",menu[i]);
+            }
+        }
+        printf("\n");
+        a=getchar();
+        if(a==10)
+        {
+            if(tcsetattr(STDIN_FILENO,0,&old_t)==-1)
+            {
+                return -1;
+            }
+            return selected;
+        }
+        if(a==27)
+        {
+            b=getchar();
+            c=getchar();
+            if(b==91 && c==66)
+            {
+                selected++;
+                if(selected==menu_size)
+                {
+                    start=0;
+                    selected=0;
+                }
+                else if(selected >=start+visible_size)
+                {
+                    start++;
+                }
+            }
+            if(b==91 && c==65)
+            {
+                selected--;
+                if(selected<0)
+                {
+                    selected=menu_size-1;
+                    start=menu_size-visible_size;
+                    if(start<0) start=0;
+                }
+                else if(selected<start)
+                {
+                    start--;
+                }
+                
+            }
+        }
+    }
+    if(tcsetattr(STDIN_FILENO,0,&old_t)==-1)
+    {
+        return -1;
+    }
 }
