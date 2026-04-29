@@ -272,3 +272,105 @@ int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int 
         return -1;
     }
 }
+
+
+int kui_choice(char *choices[],int size,int row,int column)
+{
+    int start,end;
+    int i;
+    int selected;
+    int focus;
+    struct termios new_t,old_t;
+    char a,b,c;
+    if(tcgetattr(STDIN_FILENO,&old_t)==-1)
+    {
+        //err_exit("Unable to get information using tcgetattr\n");
+        return -1;
+    }
+    new_t=old_t;
+    new_t.c_lflag=new_t.c_lflag & ~(ECHO | ICANON);
+    new_t.c_cc[VTIME]=0;
+    new_t.c_cc[VMIN]=1;
+    if(tcsetattr(STDIN_FILENO,0,&new_t)==-1)
+    {
+        //err_exit("Unable to set information using tcsetattr\n");
+        return -1;
+    }
+    selected=-1;
+    focus=0;
+    while(1)
+    {
+        kui_go_to_xy(row,column);
+        kui_clear(); 
+        for(i=0;i<size;i++)
+        {
+            if(i==focus)
+            {
+                kui_set_background_color("white");
+                printf("%s ",choices[i]);
+                if(i==selected) printf("(*)");
+                else printf("( )");
+                kui_remove_background_color();
+                printf("   ");
+            }
+            else
+            {
+                printf("%s ",choices[i]);
+                if(i==selected) printf("(*)");
+                else printf("( )");
+                printf("   ");
+            }
+        }
+        printf("\n");
+        a=getchar();
+        if(a==10)
+        {
+
+            if(tcsetattr(STDIN_FILENO,0,&old_t)==-1)
+            {
+                //err_exit("Unable to set information using tcsetattr\n");
+                return -1;
+            }
+            if(selected==-1)
+            {
+                return -1;
+            }
+            else
+            {
+                return selected;
+            }
+        }
+        if(a==32)
+        {
+            if(selected!=focus) selected=focus;
+            else if(selected==focus) selected=-1;
+        }
+        if(a==27)
+        {
+            b=getchar();
+            c=getchar();
+            if(b==91 && c==67)
+            {
+                focus++;
+                if(focus==size)
+                {
+                    focus=0;
+                }
+            }
+            if(b==91 && c==68)
+            {
+                focus--;
+                if(focus<0)
+                {
+                    focus=size-1;
+                }
+            }
+        }
+    }
+    if(tcsetattr(STDIN_FILENO,0,&old_t)==-1)
+    {
+        //err_exit("Unable to set information using tcsetattr\n");
+        return -1;
+    }
+    return 0;
+}
