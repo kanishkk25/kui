@@ -166,8 +166,17 @@ void kui_remove_color();
  */
 int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int height,int width);
 
-
-
+/**
+ * @brief Displays a fix-sized Choice list, allowing users to navigate using right / left arrow key
+ *
+ * @param choices Base address of 2D array containing options in choice
+ * @param size Size of numbers of choices
+ * @param row Row from where the choice list will be displayed
+ * @param column Column from where the choice list will be displayed
+ *
+ * @return The index of the selected option
+ *
+ */
 int kui_choice(char *choices[],int size,int row,int column);
 
 #endif
