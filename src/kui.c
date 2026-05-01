@@ -3,6 +3,7 @@
 #include<string.h>
 #include<unistd.h>
 #include<termios.h>
+#include<stdlib.h>
 /**
  * to clear the screen
  */
@@ -373,4 +374,150 @@ int kui_choice(char *choices[],int size,int row,int column)
         return -1;
     }
     return 0;
+}
+
+int * kui_checkbox(char *list[],int size, int visible_size,int row,int column,int height, int width,int *result_size)
+{ 
+    if(list==NULL || result_size==NULL) return NULL;
+    int *selected=(int *)malloc(sizeof(int)*size);
+    if(selected==NULL) return NULL;
+    for(int e=0;e<size;e++) selected[e]=-1;
+    int i;
+    int focus;
+    struct termios new_t,old_t;
+    char a,b,c;
+    int start,end;
+    int top_left_row,top_right_column,bottom_left_row,bottom_right_column;
+    int r,col;
+    *result_size=0;
+
+    if(tcgetattr(STDIN_FILENO,&old_t)==-1)
+    {
+        free(selected);
+        return NULL;
+    }
+    new_t=old_t;
+    new_t.c_lflag=new_t.c_lflag & ~(ECHO | ICANON);
+    new_t.c_cc[VTIME]=0;
+    new_t.c_cc[VMIN]=1;
+    if(tcsetattr(STDIN_FILENO,0,&new_t)==-1)
+    {
+        free(selected);
+        return NULL;
+    }
+    top_left_row=row;
+    top_right_column=column;
+    bottom_left_row=row+height;
+    bottom_right_column=column+width;
+    start=0;
+    focus=0;
+    while(1)
+    {
+        kui_clear();
+        kui_draw_box(top_left_row,top_right_column,bottom_left_row,bottom_right_column);
+        end=start+visible_size;
+        if(end>size) end=size;
+
+        r=row+1;
+        col=column+1;
+        
+        for(i=start;i<end;i++)
+        {
+            kui_go_to_xy(r,col);
+            r++;
+            if(i==focus)
+            {
+                kui_set_background_color("white");
+                printf("%s ",list[i]);
+                if(selected[i]==-1) printf("[ ]");
+                else printf("[X]");
+                kui_remove_background_color();
+                printf("\n");
+            }
+            else
+            {
+                printf("%s ",list[i]);
+                if(selected[i]==-1) printf("[ ]");
+                else printf("[X]");
+                printf("\n");
+            }
+        }
+        printf("\n");
+        a=getchar();
+        if(a==10)
+        {
+            if(tcsetattr(STDIN_FILENO,0,&old_t)==-1)
+            {
+                free(selected);
+                return NULL;
+            }
+            for(int e=0;e<size;e++)
+            {
+                if(selected[e]!=-1)
+                {
+                    (*result_size)++;
+                }
+            }
+            int *x=(int *)malloc(sizeof(int)*(*result_size));
+            if(x==NULL)
+            {
+                free(selected);
+                return NULL;
+            }
+            int j=0;
+            for(int e=0;e<size;e++)
+            {
+                if(selected[e]!=-1)
+                {
+                    x[j]=e;
+                    j++;
+                }
+            }
+            printf("\n");
+            return x;
+        }
+        if(a==32)
+        {
+            if(selected[focus]==-1) selected[focus]=1;
+            else if(selected[i]!=-1) selected[focus]=-1;
+        }
+        if(a==27)
+        {
+            b=getchar();
+            c=getchar();
+            if(b==91 && c==66)
+            {
+                focus++;
+                if(focus==size)
+                {
+                    start=0;
+                    focus=0;
+                }
+                if(focus>=start+visible_size)
+                {
+                    start++;
+                }
+
+            }
+            if(b==91 && c==65)
+            {
+                focus--;
+                if(focus<0)
+                {
+                    focus=size-1;
+                    start=size-visible_size;
+                    if(start<0) start=0;
+                }
+                else if(focus<start)
+                {
+                    start--;
+                }
+            }
+        }
+    }
+    
+    tcsetattr(STDIN_FILENO,0,&old_t);
+    *result_size=0;
+    free(selected);
+    return NULL;
 }
