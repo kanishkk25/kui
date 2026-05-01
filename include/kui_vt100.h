@@ -179,4 +179,21 @@ int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int 
  */
 int kui_choice(char *choices[],int size,int row,int column);
 
+/**
+ * @brief Displays a fix-sized Checkbox list, allowing users to navigate additional options via scrolling
+ * 
+ * @param menu base address of 2D array containing options in checkbox list
+ * @param size size of the list
+ * @param visible_size default number of options to display 
+ * @param row Row from where menu will be displayed
+ * @param column Column from where menu will be displayed
+ * @param height Height of the menu 
+ * @param width Width of the menu
+ * @param result_size Base address of an int type variable that will store the number of items selected
+ *
+ * @return Base address of int type array which stores the list of selected indexes and
+ * the user have to release the memroy of it when the work is done,(returns NULL if nothing selected)
+ *
+ */
+int *  kui_checkbox(char *list[],int size, int visible_size,int row,int column,int height, int width,int *result_size);
 #endif
