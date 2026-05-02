@@ -12,6 +12,18 @@
  */
 void kui_clear();
 
+
+/**
+ * @brief Clears the terminal screen
+ *
+ * @param row Row from which the contents should be cleared
+ * @param column Colurm from which the contens should be cleared
+ * @param height Height of the area whose contents should be cleared
+ * @param widht Width of the area whose contents shpuld be cleared
+ */
+void kui_clear_from_xy(int row,int column,int height,int width);
+
+
 /**
  * @brief Moves the cursor to a specific screen position.
  *
