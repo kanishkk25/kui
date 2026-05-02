@@ -12,6 +12,22 @@ void kui_clear()
     write(fileno(stdout),"\033[2J",4);
 }
 
+
+// this method still in testing stage
+void kui_clear_from_xy(int row,int column,int height,int width)
+{
+    int r,c;
+    int oep=row+height;
+    int iep=column+width;
+    for(r=row;r<oep;r++)
+    {
+        for(c=column;c<iep;c++)
+        {
+            kui_say(r,c," ");
+        }
+    }
+}
+
 /**
  * to go to any perticular location at screen
  */
