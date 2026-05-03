@@ -197,6 +197,10 @@ int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int 
     int r,col;
     struct termios new_t,old_t;
     char a,b,c;
+    int clear_from_row=row+1;
+    int clear_from_column=column+1;
+    int height_to_clear=height-1;
+    int width_to_clear=width-1;
     if(tcgetattr(STDIN_FILENO,&old_t)==-1)
     {
         return -1;
@@ -218,7 +222,7 @@ int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int 
     selected=0;
     while(1)
     {
-        kui_clear();
+        kui_clear_from_xy(clear_from_row,clear_from_column,height_to_clear,width_to_clear);
         kui_draw_box(top_left_row,top_right_column,bottom_left_row,bottom_right_column);
         r=row+1;
         col=column+1;
