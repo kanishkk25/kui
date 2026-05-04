@@ -321,8 +321,8 @@ int kui_choice(char *choices[],int size,int row,int column)
     focus=0;
     while(1)
     {
+        kui_clear(); // might be wrong
         kui_go_to_xy(row,column);
-        kui_clear(); 
         for(i=0;i<size;i++)
         {
             if(i==focus)
@@ -408,7 +408,8 @@ int * kui_checkbox(char *list[],int size, int visible_size,int row,int column,in
     char a,b,c;
     int start,end;
     int top_left_row,top_right_column,bottom_left_row,bottom_right_column;
-    int r,col;
+    int r,col;  
+    int clear_from_row,clear_from_column,height_to_clear,width_to_clear;
     *result_size=0;
 
     if(tcgetattr(STDIN_FILENO,&old_t)==-1)
@@ -425,6 +426,10 @@ int * kui_checkbox(char *list[],int size, int visible_size,int row,int column,in
         free(selected);
         return NULL;
     }
+    clear_from_row=row+1;
+    clear_from_column=column+1;
+    height_to_clear=height-1;
+    width_to_clear=width-1;
     top_left_row=row;
     top_right_column=column;
     bottom_left_row=row+height;
@@ -433,7 +438,7 @@ int * kui_checkbox(char *list[],int size, int visible_size,int row,int column,in
     focus=0;
     while(1)
     {
-        kui_clear();
+        kui_clear_from_xy(clear_from_row,clear_from_column,height_to_clear,width_to_clear);
         kui_draw_box(top_left_row,top_right_column,bottom_left_row,bottom_right_column);
         end=start+visible_size;
         if(end>size) end=size;
