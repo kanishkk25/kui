@@ -1,11 +1,19 @@
 /**
  * @file kui_vt100.h
- * @brief VT-100 terminal utility functions for UI.
+ * The functions of this library encapsulates the systemtem details 
  */
 
 #ifndef __KUI_VT100_H
 #define __KUI_VT100_H
 
+#define KUI_COLOR_BLACK 101
+#define KUI_COLOR_RED 102
+#define KUI_COLOR_GREEN 103
+#define KUI_COLOR_YELLOW 104
+#define KUI_COLOR_BLUE 105
+#define KUI_COLOR_MAGENTA 106
+#define KUI_COLOR_CYAN 107
+#define KUI_COLOR_WHITE 108
 
 /**
  * @brief Clears the terminal screen
