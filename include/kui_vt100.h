@@ -50,7 +50,7 @@ void kui_go_to_xy(int row,int column);
 void kui_say(int row,int column,char *str);
 
 
-/* *
+/**
  * @brief Prints a char at a given position
  *
  * @param row index of target row
