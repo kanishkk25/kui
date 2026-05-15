@@ -1,6 +1,6 @@
 /**
  * @file kui_vt100.h
- * The functions of this library encapsulates the systemtem details 
+ * The functions of this library helps C programmers to implement simple and easy user interface on terminal 
  */
 
 #ifndef __KUI_VT100_H
@@ -157,6 +157,8 @@ void kui_set_color(char *foreground_color,char *background_color);
 
 /**
  * @brief Resets background color
+ *
+ *
  */
 void kui_remove_background_color();
 
