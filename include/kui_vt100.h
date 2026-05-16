@@ -6,20 +6,21 @@
 #ifndef __KUI_VT100_H
 #define __KUI_VT100_H
 
-#define KUI_COLOR_BLACK 101
-#define KUI_COLOR_RED 102
-#define KUI_COLOR_GREEN 103
-#define KUI_COLOR_YELLOW 104
-#define KUI_COLOR_BLUE 105
-#define KUI_COLOR_MAGENTA 106
-#define KUI_COLOR_CYAN 107
-#define KUI_COLOR_WHITE 108
-
+enum KUI_COLOR
+{
+    KUI_COLOR_BLACK=101,
+    KUI_COLOR_RED=102,
+    KUI_COLOR_GREEN=103,
+    KUI_COLOR_YELLOW=104,
+    KUI_COLOR_BLUE=105,
+    KUI_COLOR_MAGENTA=106,
+    KUI_COLOR_CYAN=107,
+    KUI_COLOR_WHITE=108
+};
 /**
  * @brief Clears the terminal screen
  */
 void kui_clear();
-
 
 /**
  * @brief Clears the terminal screen
@@ -145,7 +146,7 @@ void kui_set_background_color(char *color);
  *
  * @param color foreground color
  */
-void kui_set_foreground_color(char *color);
+void kui_set_foreground_color(enum KUI_COLOR color);
 
 /**
  * @brief Set foreground and background color
