@@ -157,29 +157,28 @@ void kui_set_foreground_color(enum KUI_COLOR color)
     else if(color==KUI_COLOR_WHITE) printf("\033[37m");
 }
 
-void kui_set_background_color(char *color)
+void kui_set_background_color(enum KUI_COLOR color)
 {
-    if(strcmp(color,"black")==0) printf("\033[40m");
-    else if(strcmp(color,"red")==0) printf("\033[41m");
-    else if(strcmp(color,"green")==0) printf("\033[42m");
-    else if(strcmp(color,"yellow")==0) printf("\033[43m");
-    else if(strcmp(color,"blue")==0) printf("\033[44m");
-    else if(strcmp(color,"magenta")==0) printf("\033[45m");
-    else if(strcmp(color,"cyan")==0) printf("\033[46m");
-    else if(strcmp(color,"white")==0) printf("\033[47m");
+    if(color==KUI_COLOR_BLACK) printf("\033[40m");
+    else if(color==KUI_COLOR_RED) printf("\033[41m");
+    else if(color==KUI_COLOR_GREEN) printf("\033[42m");
+    else if(color==KUI_COLOR_YELLOW) printf("\033[43m");
+    else if(color==KUI_COLOR_BLUE) printf("\033[44m");
+    else if(color==KUI_COLOR_MAGENTA) printf("\033[45m");
+    else if(color==KUI_COLOR_CYAN) printf("\033[46m");
+    else if(color==KUI_COLOR_WHITE) printf("\033[47m");
 }
-void kui_set_color(char *foreground_color,char *background_color)
+void kui_set_color(enum KUI_COLOR foreground_color,enum KUI_COLOR background_color)
 {
-    /* change required
     kui_set_foreground_color(foreground_color);
-    */
-
     kui_set_background_color(background_color);
 }
 
 void kui_remove_background_color()
 {
-    printf("\033[49m");
+    char buffer[6];
+    sprintf(buffer,"\033[49m");
+    write(fileno(stdout),buffer,strlen(buffer));
 }
 void kui_remove_foreground_color()
 {
@@ -238,7 +237,7 @@ int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int 
             r++;
             if(i==selected)
             {
-                kui_set_background_color("white");
+                kui_set_background_color(KUI_COLOR_WHITE);
                 printf("%s\n",menu[i]);
                 kui_remove_background_color();
             }
@@ -330,7 +329,7 @@ int kui_choice(char *choices[],int size,int row,int column)
         {
             if(i==focus)
             {
-                kui_set_background_color("white");
+                kui_set_background_color(KUI_COLOR_WHITE);
                 printf("%s ",choices[i]);
                 if(i==selected) printf("(*)");
                 else printf("( )");
@@ -455,7 +454,7 @@ int * kui_checkbox(char *list[],int size, int visible_size,int row,int column,in
             r++;
             if(i==focus)
             {
-                kui_set_background_color("white");
+                kui_set_background_color(KUI_COLOR_WHITE);
                 printf("%s ",list[i]);
                 if(selected[i]==-1) printf("[ ]");
                 else printf("[X]");
