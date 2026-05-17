@@ -139,7 +139,7 @@ void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_ri
  *
  * @param color background color
  */
-void kui_set_background_color(char *color);
+void kui_set_background_color(enum KUI_COLOR color);
 
 /**
  * @brief Set foreground color
@@ -154,7 +154,7 @@ void kui_set_foreground_color(enum KUI_COLOR color);
  * @param foregounrd_color foreground color
  * @param background_color background color
  */
-void kui_set_color(char *foreground_color,char *background_color);
+void kui_set_color(enum KUI_COLOR foreground_color,enum KUI_COLOR background_color);
 
 /**
  * @brief Resets background color
