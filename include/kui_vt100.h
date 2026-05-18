@@ -17,6 +17,7 @@ enum KUI_COLOR
     KUI_COLOR_CYAN=107,
     KUI_COLOR_WHITE=108
 };
+
 /**
  * @brief Clears the terminal screen
  */
