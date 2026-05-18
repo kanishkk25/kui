@@ -1,3 +1,11 @@
+/**
+* @example menu_testcase.c
+* @author Kanishk Chouhan
+* @brief An example that uses KUI API to make Menu style UI on terminal
+*/
+
+/**
+@code
 #include<stdio.h>
 #include<termios.h>
 #include<stdlib.h>
@@ -12,3 +20,5 @@ int main()
     if(selected!=-1) printf("Selected option is : %s\n",menu[selected]);
     return 0;
 }
+@endcode
+*/
