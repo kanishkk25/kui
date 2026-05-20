@@ -162,7 +162,7 @@ void kui_set_foreground_color(enum KUI_COLOR color);
 /**
  * @brief Set foreground and background color
  *
- * @param[in] foregounrd_color Foreground color value from \ref KUI_COLOR
+ * @param[in] foreground_color Foreground color value from \ref KUI_COLOR
  * @param[in] background_color Background color value from \ref KUI_COLOR
  *
  * @note The color remains active until another color or reset escape sequence is sent. */
@@ -219,7 +219,7 @@ int kui_choice(char *choices[],int size,int row,int column);
 /**
  * @brief Displays a fix-sized Checkbox list, allowing users to navigate additional options via scrolling
  * 
- * @param[in] menu base address of 2D array containing options in checkbox list
+ * @param[in] list base address of 2D array containing options in checkbox list
  * @param[in] size size of the list
  * @param[in] visible_size default number of options to display 
  * @param[in] row Row from where menu will be displayed
