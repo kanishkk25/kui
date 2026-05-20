@@ -16,5 +16,5 @@ Include the \ref kui_vt100.h in your source code that uses kui library functions
 
 To compile -
 <pre>
-gcc		<your_source_code.c>	-I <path_to_header_file_folder>		-L <path_to_library_file_folder>		-lkui		-o		<executable_file_name>
+gcc		your_source_code.c		-I  path_to_header_file_folder		-L path_to_library_file_folder		-lkui		-o		executable_file_name
 </pre>
