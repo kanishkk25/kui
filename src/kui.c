@@ -10,6 +10,7 @@
 void kui_clear()
 {
     write(fileno(stdout),"\033[2J",4);
+    kui_go_to_xy(0,0);
 }
 
 
