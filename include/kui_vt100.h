@@ -43,6 +43,10 @@ enum KUI_COLOR
 
 /**
  * @brief Clears the terminal screen
+ * 
+ * See \ref kui_test1.c for a usage demonstration
+ *
+ * @note After clearing the terminal screen the cursor will be at position (0,0)
  */
 void kui_clear();
 
@@ -53,6 +57,10 @@ void kui_clear();
  * @param[in] column Column from which the portionshould be cleared
  * @param[in] height Height of the portion that should be cleared
  * @param[in] width Width of the the portion that should be cleared
+ *
+ * @post User should use \ref kui_go_to_xy
+ *
+ * @note The position of the cursor will be (row+height , column+widht) on the terminal screen
  */
 void kui_clear_from_xy(int row,int column,int height,int width);
 
