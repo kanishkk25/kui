@@ -73,6 +73,7 @@ void kui_draw_horizontal_line(int row,int column1,int column2)
         start++;
     }
     fflush(stdout);
+    kui_go_to_xy(row+1,0);
 }
 
 /**
@@ -86,6 +87,7 @@ void kui_draw_vertical_line(int column,int row1,int row2)
         kui_say(start,column,"\u2502");
         start++;
     }
+    kui_go_to_xy(row2+1,0);
 }
 
 
@@ -107,6 +109,8 @@ void kui_draw_box(int top_left_row,int top_left_column,int bottom_right_row,int 
     kui_draw_vertical_line(bottom_right_column,top_left_row+1,bottom_right_row-1);
 
     kui_say(bottom_right_row,bottom_right_column,"\u2518");
+    
+    kui_go_to_xy(bottom_right_row+1,0);
 }
 
 void kui_draw_double_horizontal_line(int row,int column1,int column2)
@@ -119,6 +123,7 @@ void kui_draw_double_horizontal_line(int row,int column1,int column2)
         start++;
     }
     fflush(stdout);
+    kui_go_to_xy(row+1,0);
 }
 
 void kui_draw_double_vertical_line(int column,int row1,int row2)
@@ -129,6 +134,7 @@ void kui_draw_double_vertical_line(int column,int row1,int row2)
         kui_say(start,column,"\u2551");
         start++;
     }
+    kui_go_to_xy(row2+1,0);
 }
 void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_right_row,int bottom_right_column)
 {
@@ -145,6 +151,8 @@ void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_ri
     kui_draw_double_vertical_line(bottom_right_column,top_left_row+1,bottom_right_row-1);
 
     kui_say(bottom_right_row,bottom_right_column,"\u255d");
+
+    kui_go_to_xy(bottom_right_row+1,0);
 }
 void kui_set_foreground_color(enum KUI_COLOR color)
 {
