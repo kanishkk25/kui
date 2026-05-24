@@ -1,3 +1,9 @@
+/**
+ * @example kui_test2.c
+ *
+ * Example of \ref using kui_clear_from_xy function
+ */
+
 #include<kui_vt100.h>
 #include<stdio.h>
 int main()
