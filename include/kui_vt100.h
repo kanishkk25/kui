@@ -58,7 +58,7 @@ void kui_clear();
  * @param[in] height Height of the portion that should be cleared
  * @param[in] width Width of the the portion that should be cleared
  *
- * @post User should use \ref kui_go_to_xy
+ * @post User should use \ref kui_go_to_xy function
  *
  * @note The position of the cursor will be (row+height , column+widht) on the terminal screen
  */
@@ -79,9 +79,12 @@ void kui_go_to_xy(int row,int column);
  * @param[in] row Index of target row
  * @param[in] column Index of target column
  * @param[in] str Text to be printed
+ *
+ * @post User should use \ref kui_go_to_xy function
+ *
+ * @note The position of the cursor will be after the str, after printing that on given position
  */
 void kui_say(int row,int column,char *str);
-
 
 /**
  * @brief Prints a character at a given position
@@ -89,9 +92,12 @@ void kui_say(int row,int column,char *str);
  * @param[in] row Index of target row
  * @param[in] column Index of target column
  * @param[in] m Character to be printed
+ *
+ * @post User should use \ref kui_go_to_xy function
+ *
+ * @note The position of the cursor will after the m, after printing that on given position
  */
 void kui_say_char(int row,int column,char m);
-
 
 /**
  * @brief Draws a horizontal line
@@ -99,6 +105,9 @@ void kui_say_char(int row,int column,char m);
  * @param[in] row Index of row where the horizontal line should be drawn
  * @param[in] column1 index of column from horizontal line should start
  * @param[in] column2 index of column where horizontal line should end
+ *
+ * @note The position of the cursor will be at (row+1)th row and 0th column\n
+ * Make use of \ref kui_go_to_xy function to change the cursor position
  */
 void kui_draw_horizontal_line(int row,int column1,int column2);
 
@@ -108,8 +117,11 @@ void kui_draw_horizontal_line(int row,int column1,int column2);
  * @param[in] column Index of column where the vertical line should be drawn
  * @param[in] row1 Index of row from where vertical line should start
  * @param[in] row2 Index of row where vertical line should end
+ *
+ * @note The position of the cursor will be at (row2+1)th row and 0th column\n
+ * Make use of \ref kui_go_to_xy function to change the cursor position
  */
-void kui_draw_vertical_line(int column,int row1,int row2);
+ void kui_draw_vertical_line(int column,int row1,int row2);
 
 /**
  * @brief Draws a box
@@ -118,6 +130,11 @@ void kui_draw_vertical_line(int column,int row1,int row2);
  * @param[in] top_left_column Column of top-left corner
  * @param[in] bottom_right_row Row of bottom-rigth corner
  * @param[in] bottom_right_column Colmn of bottom-right corner
+ *
+ * @note The position of the cursor will be at (bottom_right_row + 1)th row and 0th column\n
+ * Make use of \ref kui_go_to_xy function to change the cursor position \n\n
+ *
+ * Make use of \ref kui_say function to write inside the box
  */
 void kui_draw_box(int top_left_row,int top_left_column,int bottom_right_row,int bottom_right_column);
 
