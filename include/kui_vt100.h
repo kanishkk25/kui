@@ -145,6 +145,9 @@ void kui_draw_box(int top_left_row,int top_left_column,int bottom_right_row,int 
  * @param[in] row index of row where the double horizontal line should be drawn
  * @param[in] column1 index of column from double  horizontal line should start
  * @param[in] column2 index of column where double horizontal line should end
+ *
+ * @note The position of the cursor will be at (row+1)th row and 0th column\n
+ * Make use of \ref kui_go_to_xy function to change the cursor position
  */
 void kui_draw_double_horizontal_line(int row,int column1,int column2);
 
@@ -154,6 +157,9 @@ void kui_draw_double_horizontal_line(int row,int column1,int column2);
  * @param[in] column index of column where the double vertical line should be drawn
  * @param[in] row1 index of row from where double vertical line should start
  * @param[in] row2 index of row where double vertical line should end
+ *
+ * @note The position of the cursor will be at (row+1)th row and 0th column\n
+ * Make use of \ref kui_go_to_xy function to change the cursor position
  */
 void kui_draw_double_vertical_line(int column,int row1,int row2);
 
@@ -164,6 +170,11 @@ void kui_draw_double_vertical_line(int column,int row1,int row2);
  * @param[in] top_left_column Column of top-left corner
  * @param[in] bottom_right_row Row of bottom-rigth corner
  * @param[in] bottom_right_column Colmn of bottom-right corner
+ *
+ * @note The position of the cursor will be at (bottom_right_row + 1)th row and 0th column\n
+ * Make use of \ref kui_go_to_xy function to change the cursor position \n\n
+ *
+ * Make use of \ref kui_say function to write inside the box
  */
 void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_right_row,int bottom_right_column);
 
@@ -181,7 +192,8 @@ void kui_set_background_color(enum KUI_COLOR color);
  *
  * @param[in] color Foreground color value from \ref KUI_COLOR
  *
- * @note The color remains active until another color or reset escape sequence is sent. */
+ * @note The color remains active until another color or reset escape sequence is sent.
+ */
 void kui_set_foreground_color(enum KUI_COLOR color);
 
 /**
@@ -190,7 +202,8 @@ void kui_set_foreground_color(enum KUI_COLOR color);
  * @param[in] foreground_color Foreground color value from \ref KUI_COLOR
  * @param[in] background_color Background color value from \ref KUI_COLOR
  *
- * @note The color remains active until another color or reset escape sequence is sent. */
+ * @note The color remains active until another color or reset escape sequence is sent.
+ */
 void kui_set_color(enum KUI_COLOR foreground_color,enum KUI_COLOR background_color);
 
 /**
