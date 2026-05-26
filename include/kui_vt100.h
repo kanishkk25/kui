@@ -182,8 +182,14 @@ void kui_draw_double_line_box(int top_left_row,int top_left_column,int bottom_ri
  * @brief Sets the background color
  *
  * @param[in] color Background color value from \ref KUI_COLOR
+ * 
+ * @post Make use of \ref kui_remove_background_color function to reset the background color to default
  *
- * @note The color remains active until another color or reset escape sequence is sent.
+ * @note The color remains active until another color is used using \ref kui_set_background_color function
+ * or the background color is removed using \ref kui_remove_background_color function .\n\n
+ * 
+ * If user did not use a new line character then the 1st hostname that appear after program termination
+ * will have that background color.
  */
 void kui_set_background_color(enum KUI_COLOR color);
 
@@ -192,6 +198,7 @@ void kui_set_background_color(enum KUI_COLOR color);
  *
  * @param[in] color Foreground color value from \ref KUI_COLOR
  *
+ * @post Make use of \ref kui_remove_foreground_color function to reset the foreground color to default
  * @note The color remains active until another color or reset escape sequence is sent.
  */
 void kui_set_foreground_color(enum KUI_COLOR color);
@@ -201,7 +208,8 @@ void kui_set_foreground_color(enum KUI_COLOR color);
  *
  * @param[in] foreground_color Foreground color value from \ref KUI_COLOR
  * @param[in] background_color Background color value from \ref KUI_COLOR
- *
+ * 
+ * @post Make use of \ref kui_remove_color function to reset the background and background colors to default
  * @note The color remains active until another color or reset escape sequence is sent.
  */
 void kui_set_color(enum KUI_COLOR foreground_color,enum KUI_COLOR background_color);
@@ -209,17 +217,22 @@ void kui_set_color(enum KUI_COLOR foreground_color,enum KUI_COLOR background_col
 /**
  * @brief Remove the background color
  *
+ * @pre User should have used \ref kui_set_background_color function
+ *
  */
 void kui_remove_background_color();
 
 /**
  * @brief Remove the foreground color
  *
+ * @pre User should have used \ref kui_set_foreground_color function
  */
 void kui_remove_foreground_color();
 
 /**
  * @brief Remove the foreground and background color
+ *
+ * @pre User should have used \ref kui_set_color function
  */
 void kui_remove_color();
 
