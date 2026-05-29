@@ -249,7 +249,7 @@ void kui_remove_color();
  *
  * @return The index of the selected option
  * 
- * @note if some error occurend it will return -1
+ * @note if some error occurend then -1 will be returned
  */
 int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int height,int width);
 
@@ -263,7 +263,7 @@ int kui_menu(char *menu[],int menu_size,int visible_size,int row,int column,int 
  *
  * @return The index of the selected option
  *
- * @note if some error occurend it will return -1
+ * @note if some error then -1 will be returned
  */
 int kui_choice(char *choices[],int size,int row,int column);
 
