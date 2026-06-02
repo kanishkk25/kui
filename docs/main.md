@@ -4,10 +4,9 @@
 @version 1.0
 @date 2026
 
-<center>
+
 <h1>KUI</h1>
 <h3>A Lightweight Terminal User Interface Library for C</h3>
-</center>
 
 <hr>
 
@@ -232,7 +231,6 @@ See the project's LICENSE file for licensing information.
 
 <hr>
 
-<center>
+
 <b>KUI Documentation</b><br>
 Generated using Doxygen.
-</center>
